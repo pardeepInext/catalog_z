@@ -22,23 +22,25 @@ const App = () => {
     useEffect(() => document.title = "Catalog-Z")
     return (
         <>
-            <Header />
-            <TransitionGroup>
-                <CSSTransition
-                    key={currentKey}
-                    classNames="fade"
-                    timeout={300}
-                >
-                    <Switch location={location}>
-                        <Route exact path="/" component={Photos} />
-                        <Route exact path="/photo/:id" component={Photo} />
-                        <Route exact path="/videos" component={Videos} />
-                        <Route exact path="/about" component={About} />
-                        <Route exact path="/contact" component={Contact} />
-                        <Route />
-                    </Switch>
-                </CSSTransition>
-            </TransitionGroup>
+            <div id="infinter-scroll">
+                <Header />
+                <TransitionGroup>
+                    <CSSTransition
+                        key={currentKey}
+                        classNames="fade"
+                        timeout={300}
+                    >
+                        <Switch location={location}>
+                            <Route exact path="/" component={Photos} />
+                            <Route exact path="/photo/:id" component={Photo} />
+                            <Route exact path="/videos" component={Videos} />
+                            <Route exact path="/about" component={About} />
+                            <Route exact path="/contact" component={Contact} />
+                            <Route />
+                        </Switch>
+                    </CSSTransition>
+                </TransitionGroup>
+            </div>
             <Footer />
         </>
     )

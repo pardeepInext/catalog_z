@@ -4,6 +4,8 @@ const Contact = () => {
   useEffect(() => document.title = "Contact");
   const [contactData, setcontactData] = useState({ name: "", email: "", message: "", subject: "" });
   const [subjects] = useState(['Sales', 'Creative', 'UI/Ux']);
+  const [isSending, setisSending] = useState(false);
+  const [error, seterror] = useState({});
   const Subject = () => subjects.map((subject, key) => (<option key={key} value={subject}>{subject}</option>))
 
   const sendMessage = () => {

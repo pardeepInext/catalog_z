@@ -9,7 +9,7 @@ const Photos = () => {
   useEffect(() => document.title = "Catalog-Z");
   const endPhoto = useRef(null)
   const [search, setsearch] = useState("");
-  const [page, setpage] = useState(1);
+  const [isPhotoLoading, setisPhotoLoading] = useState(false);
   const [searchCategory, setsearchCategory] = useState([]);
   const [isCategoryFetch, setisCategoryFetch] = useState(false);
   const [photos, setphotos] = useState([]);
@@ -25,21 +25,16 @@ const Photos = () => {
     fetchPhoto(id);
   }
 
-  /* pagination */
-  const PaginateButtons = () => {
-    const pageBtn = [];
-    for (let index = 1; index <= lastPage; index++) {
-      pageBtn.push(<a key={index} className={index == currentPage ? 'tm-paging-link active' : 'tm-paging-link'}
-        onClick={() => setpage(index)}
-      >{index}</a>)
-    }
-    return pageBtn;
 
-  }
 
   /* show loading for category  ajax */
   const ShowLoading = () => {
     return isCategoryFetch ? <i className="fas fa-spinner fa-pulse text-white me-3"></i> : "";
+  }
+
+  /* photo fetching loading */
+  const ShowPhotoLoading = () => {
+    return isPhotoLoading ? (<p className="text-center"><i className="fas fa-spinner fa-pulse me-3"></i> Loading ...</p>) : "";
   }
   /* fetch category ajax */
 
@@ -55,7 +50,7 @@ const Photos = () => {
   }
 
   const fetchPhoto = async (cat_id = "") => {
-    Block.pulse("#end-photo");
+    setisPhotoLoading(true);
     await axios.get(`photos`, {
       params: {
         page: currentPage,
@@ -67,26 +62,12 @@ const Photos = () => {
         setlastPage(res.data.meta.last_page);
         const newPhoto = photos.concat(res.data.data);
         setphotos(newPhoto)
-        Block.remove("#end-photo");
+        setisPhotoLoading(false);
       })
       .catch(err => {
-        Block.remove("#end-photo");
         Notify.failure("Something went wrong please refresh page!")
       });
   }
-
-  const isInViewport = (element) => {
-    const rect = element.getBoundingClientRect();
-    return (
-      rect.top >= 0 &&
-      rect.left >= 0 &&
-      rect.bottom <=
-      (window.innerHeight || document.documentElement.clientHeight) &&
-      rect.right <=
-      (window.innerWidth || document.documentElement.clientWidth)
-    );
-  }
-
 
   useState(() => {
     let mounted = true;
@@ -105,13 +86,14 @@ const Photos = () => {
       mounted = false;
       window.removeEventListener("scroll", infiniteScroll);
     };
-  }, [lastPage, currentPage]);
+  }, [currentPage, lastPage]);
 
   const infiniteScroll = () => {
-    if (isInViewport(endPhoto.current) || currentPage > lastPage) {
+    let doc = document.querySelector('#infinter-scroll');
+    if (window.innerHeight + window.scrollY > doc.scrollHeight && currentPage < lastPage) {
       let NextPage = currentPage + 1;
       setcurrentPage(NextPage);
-      console.log(currentPage);
+      console.log(currentPage, lastPage);
     }
   }
   /* fetch category ajax hook  */
@@ -119,7 +101,6 @@ const Photos = () => {
     if (search.length > 1) fetchCategory()
   }, [search]);
 
-  console.log(photos);
   return (
     <>
       <div className="tm-hero d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${background})`, backgroundAttachment: 'fixed' }}>
@@ -142,34 +123,18 @@ const Photos = () => {
       </div>
       <div className="container-fluid tm-container-content tm-mt-60" data-aos="fade-down"
         data-aos-easing="linear"
-        data-aos-duration="1500">
+        data-aos-duration="1500"
+        id="photo-container"
+      >
         <div className="row mb-4">
           <h2 className="col-6 tm-text-primary">
             Latest Photos
             </h2>
-          <div className="col-6 d-flex justify-content-end align-items-center">
-            <form action="" className="tm-text-primary">
-              Page <input type="text" readOnly value={page} size="1" className="tm-input-paging tm-text-primary" onChange={(e) => setpage(e.target.vaue)} /> of {lastPage}
-            </form>
-          </div>
           <div className="row tm-mb-90 tm-gallery">
             {photos.map(photo => <Photo key={photo.id} {...photo} />)}
+            <ShowPhotoLoading />
           </div>
           <div id="end-photo" ref={endPhoto}></div>
-          <div className="row tm-mb-90">
-            <div className="col-12 d-flex justify-content-between align-items-center tm-paging-col">
-              <a className={`btn btn-primary tm-btn-prev mb-2  ${currentPage == 1 ? 'disabled' : ''}`}
-                onClick={() => setpage(currentPage - 1)}
-              >Previous</a>
-              <div className="tm-paging d-flex">
-                <PaginateButtons />
-              </div>
-              <a className={`btn btn-primary tm-btn-next ${currentPage == lastPage ? 'disabled' : ''}`}
-                onClick={() => setpage(currentPage + 1)}
-                disabled={true}
-              >Next Page</a>
-            </div>
-          </div>
         </div>
       </div>
     </>

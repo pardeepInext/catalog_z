@@ -5114,35 +5114,38 @@ var App = function App() {
     return document.title = "Catalog-Z";
   });
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_Header__WEBPACK_IMPORTED_MODULE_6__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_transition_group__WEBPACK_IMPORTED_MODULE_10__.default, {
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_transition_group__WEBPACK_IMPORTED_MODULE_11__.default, {
-        classNames: "fade",
-        timeout: 300,
-        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, {
-          location: location,
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-            exact: true,
-            path: "/",
-            component: _views_Photos__WEBPACK_IMPORTED_MODULE_3__.default
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-            exact: true,
-            path: "/photo/:id",
-            component: _views_Photo__WEBPACK_IMPORTED_MODULE_5__.default
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-            exact: true,
-            path: "/videos",
-            component: _views_Videos__WEBPACK_IMPORTED_MODULE_1__.default
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-            exact: true,
-            path: "/about",
-            component: _views_About__WEBPACK_IMPORTED_MODULE_4__.default
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-            exact: true,
-            path: "/contact",
-            component: _views_Contact__WEBPACK_IMPORTED_MODULE_2__.default
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {})]
-        })
-      }, currentKey)
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
+      id: "infinter-scroll",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_Header__WEBPACK_IMPORTED_MODULE_6__.default, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_transition_group__WEBPACK_IMPORTED_MODULE_10__.default, {
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_transition_group__WEBPACK_IMPORTED_MODULE_11__.default, {
+          classNames: "fade",
+          timeout: 300,
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Switch, {
+            location: location,
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+              exact: true,
+              path: "/",
+              component: _views_Photos__WEBPACK_IMPORTED_MODULE_3__.default
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+              exact: true,
+              path: "/photo/:id",
+              component: _views_Photo__WEBPACK_IMPORTED_MODULE_5__.default
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+              exact: true,
+              path: "/videos",
+              component: _views_Videos__WEBPACK_IMPORTED_MODULE_1__.default
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+              exact: true,
+              path: "/about",
+              component: _views_About__WEBPACK_IMPORTED_MODULE_4__.default
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
+              exact: true,
+              path: "/contact",
+              component: _views_Contact__WEBPACK_IMPORTED_MODULE_2__.default
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {})]
+          })
+        }, currentKey)
+      })]
     }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(_components_Footer__WEBPACK_IMPORTED_MODULE_7__.default, {})]
   });
 };
@@ -5767,6 +5770,16 @@ var Contact = function Contact() {
       _useState4 = _slicedToArray(_useState3, 1),
       subjects = _useState4[0];
 
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+      _useState6 = _slicedToArray(_useState5, 2),
+      isSending = _useState6[0],
+      setisSending = _useState6[1];
+
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+      _useState8 = _slicedToArray(_useState7, 2),
+      error = _useState8[0],
+      seterror = _useState8[1];
+
   var Subject = function Subject() {
     return subjects.map(function (subject, key) {
       return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
@@ -6280,10 +6293,10 @@ var Photos = function Photos() {
       search = _useState2[0],
       setsearch = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState4 = _slicedToArray(_useState3, 2),
-      page = _useState4[0],
-      setpage = _useState4[1];
+      isPhotoLoading = _useState4[0],
+      setisPhotoLoading = _useState4[1];
 
   var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState6 = _slicedToArray(_useState5, 2),
@@ -6322,34 +6335,23 @@ var Photos = function Photos() {
     setpage(1);
     fetchPhoto(id);
   };
-  /* pagination */
-
-
-  var PaginateButtons = function PaginateButtons() {
-    var pageBtn = [];
-
-    var _loop = function _loop(index) {
-      pageBtn.push( /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-        className: index == currentPage ? 'tm-paging-link active' : 'tm-paging-link',
-        onClick: function onClick() {
-          return setpage(index);
-        },
-        children: index
-      }, index));
-    };
-
-    for (var index = 1; index <= lastPage; index++) {
-      _loop(index);
-    }
-
-    return pageBtn;
-  };
   /* show loading for category  ajax */
 
 
   var ShowLoading = function ShowLoading() {
     return isCategoryFetch ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
       className: "fas fa-spinner fa-pulse text-white me-3"
+    }) : "";
+  };
+  /* photo fetching loading */
+
+
+  var ShowPhotoLoading = function ShowPhotoLoading() {
+    return isPhotoLoading ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("p", {
+      className: "text-center",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+        className: "fas fa-spinner fa-pulse me-3"
+      }), " Loading ..."]
     }) : "";
   };
   /* fetch category ajax */
@@ -6376,7 +6378,7 @@ var Photos = function Photos() {
           switch (_context.prev = _context.next) {
             case 0:
               cat_id = _args.length > 0 && _args[0] !== undefined ? _args[0] : "";
-              notiflix__WEBPACK_IMPORTED_MODULE_5__.Block.pulse("#end-photo");
+              setisPhotoLoading(true);
               _context.next = 4;
               return _axios__WEBPACK_IMPORTED_MODULE_4__.default.get("photos", {
                 params: {
@@ -6388,9 +6390,8 @@ var Photos = function Photos() {
                 setlastPage(res.data.meta.last_page);
                 var newPhoto = photos.concat(res.data.data);
                 setphotos(newPhoto);
-                notiflix__WEBPACK_IMPORTED_MODULE_5__.Block.remove("#end-photo");
+                setisPhotoLoading(false);
               })["catch"](function (err) {
-                notiflix__WEBPACK_IMPORTED_MODULE_5__.Block.remove("#end-photo");
                 notiflix__WEBPACK_IMPORTED_MODULE_5__.Notify.failure("Something went wrong please refresh page!");
               });
 
@@ -6406,11 +6407,6 @@ var Photos = function Photos() {
       return _ref.apply(this, arguments);
     };
   }();
-
-  var isInViewport = function isInViewport(element) {
-    var rect = element.getBoundingClientRect();
-    return rect.top >= 0 && rect.left >= 0 && rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) && rect.right <= (window.innerWidth || document.documentElement.clientWidth);
-  };
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(function () {
     var mounted = true;
@@ -6432,13 +6428,15 @@ var Photos = function Photos() {
       mounted = false;
       window.removeEventListener("scroll", infiniteScroll);
     };
-  }, [lastPage, currentPage]);
+  }, [currentPage, lastPage]);
 
   var infiniteScroll = function infiniteScroll() {
-    if (isInViewport(endPhoto.current) || currentPage > lastPage) {
+    var doc = document.querySelector('#infinter-scroll');
+
+    if (window.innerHeight + window.scrollY > doc.scrollHeight && currentPage < lastPage) {
       var NextPage = currentPage + 1;
       setcurrentPage(NextPage);
-      console.log(currentPage);
+      console.log(currentPage, lastPage);
     }
   };
   /* fetch category ajax hook  */
@@ -6447,7 +6445,6 @@ var Photos = function Photos() {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     if (search.length > 1) fetchCategory();
   }, [search]);
-  console.log(photos);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "tm-hero d-flex justify-content-center align-items-center",
@@ -6487,57 +6484,20 @@ var Photos = function Photos() {
       "data-aos": "fade-down",
       "data-aos-easing": "linear",
       "data-aos-duration": "1500",
+      id: "photo-container",
       children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
         className: "row mb-4",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("h2", {
           className: "col-6 tm-text-primary",
           children: "Latest Photos"
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-          className: "col-6 d-flex justify-content-end align-items-center",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
-            action: "",
-            className: "tm-text-primary",
-            children: ["Page ", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
-              type: "text",
-              readOnly: true,
-              value: page,
-              size: "1",
-              className: "tm-input-paging tm-text-primary",
-              onChange: function onChange(e) {
-                return setpage(e.target.vaue);
-              }
-            }), " of ", lastPage]
-          })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
           className: "row tm-mb-90 tm-gallery",
-          children: photos.map(function (photo) {
+          children: [photos.map(function (photo) {
             return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(_components_Photo__WEBPACK_IMPORTED_MODULE_3__.default, _objectSpread({}, photo), photo.id);
-          })
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(ShowPhotoLoading, {})]
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
           id: "end-photo",
           ref: endPhoto
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-          className: "row tm-mb-90",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
-            className: "col-12 d-flex justify-content-between align-items-center tm-paging-col",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-              className: "btn btn-primary tm-btn-prev mb-2  ".concat(currentPage == 1 ? 'disabled' : ''),
-              onClick: function onClick() {
-                return setpage(currentPage - 1);
-              },
-              children: "Previous"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("div", {
-              className: "tm-paging d-flex",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(PaginateButtons, {})
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("a", {
-              className: "btn btn-primary tm-btn-next ".concat(currentPage == lastPage ? 'disabled' : ''),
-              onClick: function onClick() {
-                return setpage(currentPage + 1);
-              },
-              disabled: true,
-              children: "Next Page"
-            })]
-          })
         })]
       })
     })]

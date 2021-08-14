@@ -4,6 +4,8 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PhotoController;
 use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\ContactController;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -39,3 +41,12 @@ Route::get('/donwload/photo/{id}', [PhotoController::class, 'donwloadCount']);
 Route::apiResources([
     'photos' => PhotoController::class
 ]);
+
+
+/*
+|--------------------------------------------------------------------------
+| Contact Routes
+|--------------------------------------------------------------------------
+*/
+
+Route::post('/contact', [ContactController::class, 'index']);
