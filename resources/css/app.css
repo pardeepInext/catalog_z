@@ -1,0 +1,9 @@
+.icon-container {
+    position: relative;
+}
+
+.icon-container {
+    position: absolute;
+    right: 10px;
+    top: calc(50% - 10px);
+}
