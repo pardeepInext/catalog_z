@@ -5111,8 +5111,9 @@ var App = function App() {
   var location = (0,react_router_dom__WEBPACK_IMPORTED_MODULE_9__.useLocation)();
   var currentKey = location.pathname.split("/")[1] || "/";
   (0,react__WEBPACK_IMPORTED_MODULE_0__.useEffect)(function () {
-    return document.title = "Catalog-Z";
-  });
+    document.title = "Catalog-Z";
+    window.scrollTo(0, 0);
+  }, [location]);
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsxs)("div", {
       id: "infinter-scroll",
@@ -5130,10 +5131,6 @@ var App = function App() {
               exact: true,
               path: "/photo/:id",
               component: _views_Photo__WEBPACK_IMPORTED_MODULE_5__.default
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
-              exact: true,
-              path: "/videos",
-              component: _views_Videos__WEBPACK_IMPORTED_MODULE_1__.default
             }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_8__.jsx)(react_router_dom__WEBPACK_IMPORTED_MODULE_9__.Route, {
               exact: true,
               path: "/about",
@@ -5337,10 +5334,6 @@ var Header = function Header() {
     name: 'Photos',
     link: '/',
     navClass: 'nav-link-1'
-  }, {
-    name: 'Videos',
-    link: '/videos',
-    navClass: 'nav-link-2'
   }, {
     name: 'About',
     link: '/about',
@@ -5724,14 +5717,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   "default": () => (__WEBPACK_DEFAULT_EXPORT__)
 /* harmony export */ });
-/* harmony import */ var _img_hero_jpg__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! ../../img/hero.jpg */ "./resources/img/hero.jpg");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime/regenerator */ "./node_modules/@babel/runtime/regenerator/index.js");
+/* harmony import */ var _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _img_hero_jpg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../img/hero.jpg */ "./resources/img/hero.jpg");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! notiflix */ "./node_modules/notiflix/dist/notiflix-aio-3.0.1.min.js");
+/* harmony import */ var notiflix__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(notiflix__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../axios */ "./resources/js/axios.js");
+/* harmony import */ var react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react/jsx-runtime */ "./node_modules/react/jsx-runtime.js");
+
+
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) { symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); } keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
 
 function _slicedToArray(arr, i) { return _arrayWithHoles(arr) || _iterableToArrayLimit(arr, i) || _unsupportedIterableToArray(arr, i) || _nonIterableRest(); }
 
@@ -5751,12 +5755,14 @@ function _arrayWithHoles(arr) { if (Array.isArray(arr)) return arr; }
 
 
 
+
+
 var Contact = function Contact() {
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
+  (0,react__WEBPACK_IMPORTED_MODULE_2__.useEffect)(function () {
     return document.title = "Contact";
   });
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({
     name: "",
     email: "",
     message: "",
@@ -5766,80 +5772,121 @@ var Contact = function Contact() {
       contactData = _useState2[0],
       setcontactData = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(['Sales', 'Creative', 'UI/Ux']),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(['Sales', 'Creative', 'UI/Ux']),
       _useState4 = _slicedToArray(_useState3, 1),
       subjects = _useState4[0];
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)(false),
       _useState6 = _slicedToArray(_useState5, 2),
       isSending = _useState6[0],
       setisSending = _useState6[1];
 
-  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)({}),
+  var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_2__.useState)({}),
       _useState8 = _slicedToArray(_useState7, 2),
       error = _useState8[0],
       seterror = _useState8[1];
 
   var Subject = function Subject() {
     return subjects.map(function (subject, key) {
-      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+      return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
         value: subject,
         children: subject
       }, key);
     });
   };
 
-  var sendMessage = function sendMessage() {
-    console.log(contactData);
-  };
+  var sendMessage = /*#__PURE__*/function () {
+    var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
+        while (1) {
+          switch (_context.prev = _context.next) {
+            case 0:
+              setisSending(true);
+              _context.next = 3;
+              return _axios__WEBPACK_IMPORTED_MODULE_4__.default.post("contact", contactData).then(function (res) {
+                setisSending(false);
 
-  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.Fragment, {
-    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                if (res.data.success) {
+                  notiflix__WEBPACK_IMPORTED_MODULE_3__.Notify.success("message is sent");
+                  setcontactData(_objectSpread(_objectSpread({}, contactData), {}, {
+                    name: "",
+                    email: "",
+                    message: "",
+                    subject: ""
+                  }));
+                } else {
+                  seterror(res.data.error);
+                }
+              })["catch"](function (err) {
+                return notiflix__WEBPACK_IMPORTED_MODULE_3__.Notify.success("Somthing went wrong. Please refresh page. error:".concat(err.message));
+              });
+
+            case 3:
+            case "end":
+              return _context.stop();
+          }
+        }
+      }, _callee);
+    }));
+
+    return function sendMessage() {
+      return _ref.apply(this, arguments);
+    };
+  }();
+
+  return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.Fragment, {
+    children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "tm-hero d-flex justify-content-center align-items-center",
       style: {
-        backgroundImage: "url(".concat(_img_hero_jpg__WEBPACK_IMPORTED_MODULE_0__.default, ")"),
+        backgroundImage: "url(".concat(_img_hero_jpg__WEBPACK_IMPORTED_MODULE_1__.default, ")"),
         backgroundAttachment: 'fixed'
       }
-    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+    }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
       className: "container-fluid tm-mt-60",
-      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+      children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
         className: "row tm-mb-50",
-        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "col-lg-4 col-12 mb-5",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
             className: "tm-text-primary mb-5",
             children: "Contact Page"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("form", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("form", {
             id: "contact-form",
             className: "tm-contact-form mx-auto",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "form-group",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
                 type: "text",
                 name: "name",
-                className: "form-control rounded-0",
+                className: "form-control rounded-0 ".concat(error.name ? 'is-invalid' : ''),
                 placeholder: "Name",
                 value: contactData.name,
                 onChange: function onChange(e) {
                   return setcontactData(_objectSpread(_objectSpread({}, contactData), {}, _defineProperty({}, 'name', e.target.value)));
                 }
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              }), error.name ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                className: "text-danger fw-bold",
+                children: error.name
+              }) : ""]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "form-group",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("input", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("input", {
                 type: "email",
                 name: "email",
-                className: "form-control rounded-0",
+                className: "form-control rounded-0 ".concat(error.email ? 'is-invalid' : ''),
                 placeholder: "Email",
                 value: contactData.email,
                 onChange: function onChange(e) {
                   return setcontactData(_objectSpread(_objectSpread({}, contactData), {}, _defineProperty({}, 'email', e.target.value)));
                 }
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              }), error.email ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                className: "text-danger fw-bold",
+                children: error.email
+              }) : ""]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "form-group",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("select", {
-                className: "form-control",
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("select", {
+                className: "form-control ".concat(error.email ? 'is-invalid' : ''),
                 id: "contact-select",
                 name: "inquiry",
                 value: contactData.subject,
@@ -5848,17 +5895,20 @@ var Contact = function Contact() {
                     subject: e.target.value
                   }));
                 },
-                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+                children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("option", {
                   value: "-",
                   children: "Subject"
-                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)(Subject, {})]
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+                }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)(Subject, {})]
+              }), error.subject ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                className: "text-danger fw-bold",
+                children: error.subject
+              }) : ""]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
               className: "form-group",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("textarea", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("textarea", {
                 rows: "8",
                 name: "message",
-                className: "form-control rounded-0",
+                className: "form-control rounded-0 ".concat(error.message ? 'is-invalid' : ''),
                 placeholder: "Message",
                 value: contactData.message,
                 onChange: function onChange(e) {
@@ -5866,72 +5916,78 @@ var Contact = function Contact() {
                     message: e.target.value
                   }));
                 }
-              })
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+              }), error.message ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("span", {
+                className: "text-danger fw-bold",
+                children: error.message
+              }) : ""]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "form-group tm-text-right",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("button", {
                 type: "button",
                 className: "btn btn-primary",
                 onClick: sendMessage,
-                children: "Send"
+                disabled: isSending,
+                children: [isSending ? /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
+                  className: "fas fa-cog fa-spin"
+                }) : "", "Send"]
               })
             })]
           })]
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
           className: "col-lg-4 col-12 mb-5",
-          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+          children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
             className: "tm-address-col",
-            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+            children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
               className: "tm-text-primary mb-5",
               children: "Our Address"
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
               className: "tm-mb-50",
               children: "Quisque eleifend mi et nisi eleifend pretium. Duis porttitor accumsan arcu id rhoncus. Praesent fermentum venenatis ipsum, eget vestibulum purus. "
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("p", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("p", {
               className: "tm-mb-50",
               children: "Nulla ut scelerisque elit, in fermentum ante. Aliquam congue mattis erat, eget iaculis enim posuere nec. Quisque risus turpis, tempus in iaculis."
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("address", {
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("address", {
               className: "tm-text-gray tm-mb-50",
-              children: ["120-240 Fusce eleifend varius tempus", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("br", {}), "Duis consectetur at ligula 10660"]
-            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("ul", {
+              children: ["120-240 Fusce eleifend varius tempus", /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("br", {}), "Duis consectetur at ligula 10660"]
+            }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("ul", {
               className: "tm-contacts",
-              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+              children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
                   href: "false",
                   className: "tm-text-gray",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
                     className: "fas fa-envelope"
                   }), "Email: info@company.com"]
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
                   href: "false",
                   className: "tm-text-gray",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
                     className: "fas fa-phone"
                   }), "Tel: 010-020-0340"]
                 })
-              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("li", {
-                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("a", {
+              }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("li", {
+                children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("a", {
                   href: "false",
                   className: "tm-text-gray",
-                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
+                  children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("i", {
                     className: "fas fa-globe"
                   }), "URL: www.company.com"]
                 })
               })]
             })]
           })
-        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsxs)("div", {
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsxs)("div", {
           className: "col-lg-4 col-12",
-          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("h2", {
+          children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("h2", {
             className: "tm-text-primary mb-5",
             children: "Our Location"
-          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+          }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
             className: "mapouter mb-4",
-            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("div", {
+            children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("div", {
               className: "gmap-canvas",
-              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("iframe", {
+              children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_5__.jsx)("iframe", {
                 width: "100%",
                 height: "520",
                 id: "gmap-canvas",
@@ -6186,7 +6242,7 @@ var Photo = function Photo() {
                   children: "Format: "
                 }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsx)("span", {
                   className: "tm-text-primary",
-                  children: "JPG"
+                  children: photoDetails.path ? photoDetails.path.split(".")[1].toUpperCase() : "Loading..."
                 })]
               }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_6__.jsxs)("div", {
                 className: "mb-4",
@@ -6286,54 +6342,68 @@ var Photos = function Photos() {
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     return document.title = "Catalog-Z";
   });
+  var mounted = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(true);
   var endPhoto = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
 
-  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+  var _useState = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState2 = _slicedToArray(_useState, 2),
-      search = _useState2[0],
-      setsearch = _useState2[1];
+      isVideoPause = _useState2[0],
+      setisVideoPause = _useState2[1];
 
-  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
-      _useState4 = _slicedToArray(_useState3, 2),
-      isPhotoLoading = _useState4[0],
-      setisPhotoLoading = _useState4[1];
+  var videoRef = (0,react__WEBPACK_IMPORTED_MODULE_1__.useRef)(null);
 
-  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
+  var _useState3 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(document.querySelector("meta[name='asset']").content),
+      _useState4 = _slicedToArray(_useState3, 1),
+      asset = _useState4[0];
+
+  var _useState5 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
       _useState6 = _slicedToArray(_useState5, 2),
-      searchCategory = _useState6[0],
-      setsearchCategory = _useState6[1];
+      search = _useState6[0],
+      setsearch = _useState6[1];
 
   var _useState7 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState8 = _slicedToArray(_useState7, 2),
-      isCategoryFetch = _useState8[0],
-      setisCategoryFetch = _useState8[1];
+      isPhotoLoading = _useState8[0],
+      setisPhotoLoading = _useState8[1];
 
   var _useState9 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState10 = _slicedToArray(_useState9, 2),
-      photos = _useState10[0],
-      setphotos = _useState10[1];
+      searchCategory = _useState10[0],
+      setsearchCategory = _useState10[1];
 
-  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+  var _useState11 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(false),
       _useState12 = _slicedToArray(_useState11, 2),
-      currentPage = _useState12[0],
-      setcurrentPage = _useState12[1];
+      isCategoryFetch = _useState12[0],
+      setisCategoryFetch = _useState12[1];
 
-  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+  var _useState13 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)([]),
       _useState14 = _slicedToArray(_useState13, 2),
-      lastPage = _useState14[0],
-      setlastPage = _useState14[1];
+      photos = _useState14[0],
+      setphotos = _useState14[1];
+
+  var _useState15 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(1),
+      _useState16 = _slicedToArray(_useState15, 2),
+      page = _useState16[0],
+      setPage = _useState16[1];
+
+  var _useState17 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(""),
+      _useState18 = _slicedToArray(_useState17, 2),
+      catId = _useState18[0],
+      setCatId = _useState18[1]; // const [currentPage, setcurrentPage] = useState(1);
+
+
+  var _useState19 = (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(0),
+      _useState20 = _slicedToArray(_useState19, 2),
+      lastPage = _useState20[0],
+      setlastPage = _useState20[1];
 
   var searchChange = function searchChange(e) {
     return setsearch(e.target.value);
   };
 
-  var onSearch = function onSearch() {
-    var filterArr = searchCategory.filter(function (value) {
-      return value.name == search;
-    });
-    var id = filterArr.length > 0 ? filterArr[0].id : "";
-    setpage(1);
-    fetchPhoto(id);
+  var pauseVideo = function pauseVideo() {
+    setisVideoPause(!isVideoPause);
+    isVideoPause ? videoRef.current.play() : videoRef.current.pause();
   };
   /* show loading for category  ajax */
 
@@ -6371,31 +6441,27 @@ var Photos = function Photos() {
 
   var fetchPhoto = /*#__PURE__*/function () {
     var _ref = _asyncToGenerator( /*#__PURE__*/_babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().mark(function _callee() {
-      var cat_id,
-          _args = arguments;
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default().wrap(function _callee$(_context) {
         while (1) {
           switch (_context.prev = _context.next) {
             case 0:
-              cat_id = _args.length > 0 && _args[0] !== undefined ? _args[0] : "";
               setisPhotoLoading(true);
-              _context.next = 4;
+              _context.next = 3;
               return _axios__WEBPACK_IMPORTED_MODULE_4__.default.get("photos", {
                 params: {
-                  page: currentPage,
-                  category_id: cat_id
+                  page: page,
+                  category_id: catId
                 }
               }).then(function (res) {
-                setcurrentPage(res.data.meta.current_page);
                 setlastPage(res.data.meta.last_page);
-                var newPhoto = photos.concat(res.data.data);
+                var newPhoto = page == 1 ? res.data.data : photos.concat(res.data.data);
                 setphotos(newPhoto);
                 setisPhotoLoading(false);
               })["catch"](function (err) {
-                notiflix__WEBPACK_IMPORTED_MODULE_5__.Notify.failure("Something went wrong please refresh page!");
+                notiflix__WEBPACK_IMPORTED_MODULE_5__.Notify.failure("Something went wrong please refresh page! ".concat(err.message));
               });
 
-            case 4:
+            case 3:
             case "end":
               return _context.stop();
           }
@@ -6408,13 +6474,14 @@ var Photos = function Photos() {
     };
   }();
 
-  (0,react__WEBPACK_IMPORTED_MODULE_1__.useState)(function () {
-    var mounted = true;
-    if (mounted) fetchPhoto();
-    return function () {
-      return mounted = false;
-    };
-  }); //fetching photos from API
+  var onSearch = function onSearch() {
+    var filterArr = searchCategory.filter(function (value) {
+      return value.name == search;
+    });
+    var id = filterArr.length > 0 ? filterArr[0].id : "";
+    setCatId(id);
+  }; //fetching photos from API
+
 
   (0,react__WEBPACK_IMPORTED_MODULE_1__.useEffect)(function () {
     var mounted = true;
@@ -6428,15 +6495,15 @@ var Photos = function Photos() {
       mounted = false;
       window.removeEventListener("scroll", infiniteScroll);
     };
-  }, [currentPage, lastPage]);
+  }, [page, lastPage, catId]);
 
   var infiniteScroll = function infiniteScroll() {
     var doc = document.querySelector('#infinter-scroll');
 
-    if (window.innerHeight + window.scrollY > doc.scrollHeight && currentPage < lastPage) {
-      var NextPage = currentPage + 1;
-      setcurrentPage(NextPage);
-      console.log(currentPage, lastPage);
+    if (window.innerHeight + window.scrollY > doc.scrollHeight && page < lastPage) {
+      var NextPage = page + 1;
+      setPage(NextPage);
+      console.log(page);
     }
   };
   /* fetch category ajax hook  */
@@ -6448,20 +6515,32 @@ var Photos = function Photos() {
   return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)(react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.Fragment, {
     children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("div", {
       className: "tm-hero d-flex justify-content-center align-items-center",
-      style: {
-        backgroundImage: "url(".concat(_img_hero_jpg__WEBPACK_IMPORTED_MODULE_2__.default, ")"),
-        backgroundAttachment: 'fixed'
-      },
-      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)(ShowLoading, {}), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
-        className: "d-flex tm-search-form",
+      id: "tm-video-container",
+      children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("video", {
+        autoPlay: true,
+        muted: true,
+        loop: true,
+        id: "tm-video",
+        ref: videoRef,
+        children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("source", {
+          src: "".concat(asset, "assets/video/hero.mp4"),
+          type: "video/mp4"
+        })
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("i", {
+        id: "tm-video-control-button",
+        className: !isVideoPause ? "fas fa-pause" : "fas fa-play",
+        onClick: pauseVideo
+      }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsxs)("form", {
+        className: "d-flex position-absolute tm-search-form",
         children: [/*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("input", {
           className: "form-control tm-search-input",
           type: "search",
           placeholder: "Search",
           "aria-label": "Search",
           value: search,
-          onChange: searchChange,
-          autoComplete: "off",
+          onChange: function onChange(e) {
+            return setsearch(e.target.value);
+          },
           list: "categories"
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_7__.jsx)("datalist", {
           id: "categories",
@@ -6599,12 +6678,20 @@ var Videos = function Videos() {
           placeholder: "Search",
           "aria-label": "Search",
           value: search,
-          onChange: function onChange(e) {
-            return setsearch(e.target.value);
-          }
+          onChange: searchChange,
+          autoComplete: "off",
+          list: "categories"
+        }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("datalist", {
+          id: "categories",
+          children: searchCategory.map(function (category, index) {
+            return /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("option", {
+              value: category.name
+            }, index);
+          })
         }), /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("button", {
           className: "btn btn-outline-success tm-search-btn",
-          type: "submit",
+          type: "button",
+          onClick: onSearch,
           children: /*#__PURE__*/(0,react_jsx_runtime__WEBPACK_IMPORTED_MODULE_2__.jsx)("i", {
             className: "fas fa-search"
           })

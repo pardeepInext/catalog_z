@@ -70,7 +70,6 @@ const Photo = () => {
     useEffect(() => {
         if (photoDetails.category_id) fetchRelatedPhoto(photoDetails.category_id);
     }, [photoDetails])
-
     return (
         <>
             <div className="tm-hero" style={{ backgroundImage: `url(${background})`, backgroundAttachment: 'fixed' }}>
@@ -103,7 +102,7 @@ const Photo = () => {
                                     <span className="tm-text-gray-dark">Dimension: </span><span className="tm-text-primary">1920x1080</span>
                                 </div>
                                 <div className="mr-4 mb-2">
-                                    <span className="tm-text-gray-dark">Format: </span><span className="tm-text-primary">JPG</span>
+                                    <span className="tm-text-gray-dark">Format: </span><span className="tm-text-primary">{photoDetails.path ? photoDetails.path.split(".")[1].toUpperCase() : "Loading..."}</span>
                                 </div>
                                 <div className="mb-4">
                                     <h3 className="tm-text-gray-dark mb-3">License</h3>

@@ -7,25 +7,27 @@ import { map } from 'lodash';
 
 const Photos = () => {
   useEffect(() => document.title = "Catalog-Z");
+  const mounted = useRef(true);
   const endPhoto = useRef(null)
+  const [isVideoPause, setisVideoPause] = useState(false);
+  const videoRef = useRef(null)
+  const [asset] = useState(document.querySelector("meta[name='asset']").content);
   const [search, setsearch] = useState("");
   const [isPhotoLoading, setisPhotoLoading] = useState(false);
   const [searchCategory, setsearchCategory] = useState([]);
   const [isCategoryFetch, setisCategoryFetch] = useState(false);
   const [photos, setphotos] = useState([]);
-  const [currentPage, setcurrentPage] = useState(1);
+  const [page, setPage] = useState(1);
+  const [catId, setCatId] = useState("");
+  // const [currentPage, setcurrentPage] = useState(1);
   const [lastPage, setlastPage] = useState(0);
 
   const searchChange = (e) => setsearch(e.target.value);
 
-  const onSearch = () => {
-    const filterArr = searchCategory.filter((value) => value.name == search);
-    let id = filterArr.length > 0 ? filterArr[0].id : "";
-    setpage(1);
-    fetchPhoto(id);
+  const pauseVideo = () => {
+    setisVideoPause(!isVideoPause);
+    isVideoPause ? videoRef.current.play() : videoRef.current.pause()
   }
-
-
 
   /* show loading for category  ajax */
   const ShowLoading = () => {
@@ -49,32 +51,30 @@ const Photos = () => {
       });
   }
 
-  const fetchPhoto = async (cat_id = "") => {
+  const fetchPhoto = async () => {
     setisPhotoLoading(true);
     await axios.get(`photos`, {
       params: {
-        page: currentPage,
-        category_id: cat_id
+        page: page,
+        category_id: catId
       }
     })
       .then(res => {
-        setcurrentPage(res.data.meta.current_page);
         setlastPage(res.data.meta.last_page);
-        const newPhoto = photos.concat(res.data.data);
+        const newPhoto = page == 1 ? res.data.data : photos.concat(res.data.data);
         setphotos(newPhoto)
         setisPhotoLoading(false);
       })
       .catch(err => {
-        Notify.failure("Something went wrong please refresh page!")
+        Notify.failure(`Something went wrong please refresh page! ${err.message}`)
       });
   }
 
-  useState(() => {
-    let mounted = true;
-    if (mounted) fetchPhoto();
-    return () => mounted = false;
-  })
-
+  const onSearch = () => {
+    const filterArr = searchCategory.filter((value) => value.name == search);
+    let id = filterArr.length > 0 ? filterArr[0].id : "";
+    setCatId(id);
+  }
   //fetching photos from API
   useEffect(() => {
     let mounted = true;
@@ -86,14 +86,14 @@ const Photos = () => {
       mounted = false;
       window.removeEventListener("scroll", infiniteScroll);
     };
-  }, [currentPage, lastPage]);
+  }, [page, lastPage, catId]);
 
   const infiniteScroll = () => {
     let doc = document.querySelector('#infinter-scroll');
-    if (window.innerHeight + window.scrollY > doc.scrollHeight && currentPage < lastPage) {
-      let NextPage = currentPage + 1;
-      setcurrentPage(NextPage);
-      console.log(currentPage, lastPage);
+    if (window.innerHeight + window.scrollY > doc.scrollHeight && page < lastPage) {
+      let NextPage = page + 1;
+      setPage(NextPage);
+      console.log(page);
     }
   }
   /* fetch category ajax hook  */
@@ -103,12 +103,14 @@ const Photos = () => {
 
   return (
     <>
-      <div className="tm-hero d-flex justify-content-center align-items-center" style={{ backgroundImage: `url(${background})`, backgroundAttachment: 'fixed' }}>
-        <ShowLoading />
-        <form className="d-flex tm-search-form">
+      <div className="tm-hero d-flex justify-content-center align-items-center" id="tm-video-container">
+        <video autoPlay muted loop id="tm-video" ref={videoRef}>
+          <source src={`${asset}assets/video/hero.mp4`} type="video/mp4" />
+        </video>
+        <i id="tm-video-control-button" className={!isVideoPause ? `fas fa-pause` : `fas fa-play`} onClick={pauseVideo}></i>
+        <form className="d-flex position-absolute tm-search-form">
           <input className="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search" value={search}
-            onChange={searchChange}
-            autoComplete="off"
+            onChange={(e) => setsearch(e.target.value)}
             list="categories"
           />
           <datalist id="categories">

@@ -8,11 +8,6 @@ const Header = () => {
             navClass: 'nav-link-1',
         },
         {
-            name: 'Videos',
-            link: '/videos',
-            navClass: 'nav-link-2',
-        },
-        {
             name: 'About',
             link: '/about',
             navClass: 'nav-link-3',

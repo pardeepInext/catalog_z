@@ -5,6 +5,13 @@ TemplateMo 556 Catalog-Z
 https://templatemo.com/tm-556-catalog-z
 
 */
+body {
+    scroll-behavior: smooth !important;
+}
+
+/* #tm-video-control-button {
+    cursor: pointer;
+} */
 
 #loader-wrapper {
     position: fixed;
@@ -535,6 +542,7 @@ figure.effect-ming:hover img {
     right: 20px;
     z-index: 1000;
     color: #e1e1e1;
+    cursor: pointer !important;
 }
 
 .tm-video-details {

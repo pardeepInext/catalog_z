@@ -1,5 +1,7 @@
 import bgImg from '../../img/hero.jpg'
 import React, { useState, useEffect } from 'react';
+import { Notify } from 'notiflix';
+import axios from '../axios';
 const Contact = () => {
   useEffect(() => document.title = "Contact");
   const [contactData, setcontactData] = useState({ name: "", email: "", message: "", subject: "" });
@@ -8,8 +10,21 @@ const Contact = () => {
   const [error, seterror] = useState({});
   const Subject = () => subjects.map((subject, key) => (<option key={key} value={subject}>{subject}</option>))
 
-  const sendMessage = () => {
-    console.log(contactData);
+  const sendMessage = async () => {
+    setisSending(true);
+    await axios.post(`contact`, contactData)
+      .then(res => {
+        setisSending(false);
+        if (res.data.success) {
+          Notify.success("message is sent");
+          setcontactData({ ...contactData, name: "", email: "", message: "", subject: "" })
+        } else {
+          seterror(res.data.error);
+        }
+      })
+      .catch(err => Notify.success(`Somthing went wrong. Please refresh page. error:${err.message}`));
+
+
   }
 
   return (
@@ -21,32 +36,41 @@ const Contact = () => {
             <h2 className="tm-text-primary mb-5">Contact Page</h2>
             <form id="contact-form" className="tm-contact-form mx-auto">
               <div className="form-group">
-                <input type="text" name="name" className="form-control rounded-0" placeholder="Name" value={contactData.name}
+                <input type="text" name="name" className={`form-control rounded-0 ${error.name ? 'is-invalid' : ''}`} placeholder="Name" value={contactData.name}
                   onChange={(e) => setcontactData({ ...contactData, ['name']: e.target.value })}
                 />
+                {error.name ? (<span className="text-danger fw-bold">{error.name}</span>) : ""}
               </div>
               <div className="form-group">
-                <input type="email" name="email" className="form-control rounded-0" placeholder="Email"
+                <input type="email" name="email" className={`form-control rounded-0 ${error.email ? 'is-invalid' : ''}`} placeholder="Email"
                   value={contactData.email}
                   onChange={(e) => setcontactData({ ...contactData, ['email']: e.target.value })}
                 />
+                {error.email ? (<span className="text-danger fw-bold">{error.email}</span>) : ""}
               </div>
               <div className="form-group">
-                <select className="form-control" id="contact-select" name="inquiry"
+                <select className={`form-control ${error.email ? 'is-invalid' : ''}`} id="contact-select" name="inquiry"
                   value={contactData.subject} onChange={(e) => setcontactData({ ...contactData, subject: e.target.value })}
                 >
                   <option value="-">Subject</option>
                   <Subject />
                 </select>
+                {error.subject ? (<span className="text-danger fw-bold">{error.subject}</span>) : ""}
               </div>
               <div className="form-group">
-                <textarea rows="8" name="message" className="form-control rounded-0" placeholder="Message"
+                <textarea rows="8" name="message" className={`form-control rounded-0 ${error.message ? 'is-invalid' : ''}`} placeholder="Message"
                   value={contactData.message} onChange={(e) => setcontactData({ ...contactData, message: e.target.value })}
                 ></textarea>
+                {error.message ? (<span className="text-danger fw-bold">{error.message}</span>) : ""}
               </div>
 
               <div className="form-group tm-text-right">
-                <button type="button" className="btn btn-primary" onClick={sendMessage}>Send</button>
+                <button type="button" className="btn btn-primary" onClick={sendMessage}
+                  disabled={isSending}
+                >
+                  {isSending ? <i className="fas fa-cog fa-spin"></i> : ""}
+                  Send
+                </button>
               </div>
             </form>
           </div>

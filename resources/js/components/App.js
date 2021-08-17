@@ -19,7 +19,11 @@ import Footer from '../components/Footer';
 const App = () => {
     let location = useLocation();
     let currentKey = location.pathname.split("/")[1] || "/";
-    useEffect(() => document.title = "Catalog-Z")
+    useEffect(() => {
+        document.title = "Catalog-Z";
+        window.scrollTo(0, 0);
+    }, [location])
+
     return (
         <>
             <div id="infinter-scroll">
@@ -33,7 +37,6 @@ const App = () => {
                         <Switch location={location}>
                             <Route exact path="/" component={Photos} />
                             <Route exact path="/photo/:id" component={Photo} />
-                            <Route exact path="/videos" component={Videos} />
                             <Route exact path="/about" component={About} />
                             <Route exact path="/contact" component={Contact} />
                             <Route />

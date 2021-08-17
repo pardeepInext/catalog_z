@@ -27,9 +27,16 @@ const Videos = () => {
                 <i id="tm-video-control-button" className={!isVideoPause ? `fas fa-pause` : `fas fa-play`} onClick={pauseVideo}></i>
                 <form className="d-flex position-absolute tm-search-form">
                     <input className="form-control tm-search-input" type="search" placeholder="Search" aria-label="Search" value={search}
-                        onChange={(e) => setsearch(e.target.value)}
+                        onChange={searchChange}
+                        autoComplete="off"
+                        list="categories"
                     />
-                    <button className="btn btn-outline-success tm-search-btn" type="submit">
+                    <datalist id="categories">
+                        {searchCategory.map((category, index) => (<option key={index} value={category.name} />))}
+                    </datalist>
+                    <button className="btn btn-outline-success tm-search-btn" type="button"
+                        onClick={onSearch}
+                    >
                         <i className="fas fa-search"></i>
                     </button>
                 </form>

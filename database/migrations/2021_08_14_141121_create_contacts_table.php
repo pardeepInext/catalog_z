@@ -19,7 +19,7 @@ class CreateContactsTable extends Migration
             $table->string('email');
             $table->string('subject');
             $table->text('message');
-            $table->enum('status', ['pending', 'resolved']);
+            $table->enum('status', ['pending', 'resolved'])->default("pending");
             $table->timestamps();
         });
     }
