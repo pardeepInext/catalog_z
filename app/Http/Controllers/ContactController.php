@@ -22,7 +22,7 @@ class ContactController extends Controller
         if ($validator->fails()) return response()->json(['success' => false, 'error' => $validator->errors()]);
 
         $contact = contact::create($request->only('name', 'email', 'message', 'subject'));
-        Mail::to('admin@catalog.com')->send(new ContactMail($request->only('name', 'email', 'subject', 'message')));
+        Mail::to($request->email)->send(new ContactMail($request->only('name', 'email', 'subject', 'message')));
         return response()->json(['success' => true]);
     }
 }
